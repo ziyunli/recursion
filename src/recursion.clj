@@ -7,13 +7,28 @@
        (product (rest coll)))))
 
 (defn singleton? [coll]
-  :-)
+  (and
+   (boolean (seq coll))
+   (empty? (rest coll))))
 
 (defn my-last [coll]
-  :-)
+  (if (empty? coll)
+    nil
+    (if (empty? (rest coll))
+      (first coll)
+      (my-last (rest coll)))))
+
+(defn max-element-acc [a-seq curr]
+  (if (empty? a-seq)
+    curr
+    (if (> (first a-seq) curr)
+      (max-element-acc (rest a-seq) (first a-seq))
+      (max-element-acc (rest a-seq) curr))))
 
 (defn max-element [a-seq]
-  :-)
+  (if (empty? a-seq)
+    nil
+    (max-element-acc (rest a-seq) (first a-seq))))
 
 (defn seq-max [seq-1 seq-2]
   [:-])
