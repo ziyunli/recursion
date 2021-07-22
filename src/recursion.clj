@@ -31,22 +31,46 @@
     (max-element-acc (rest a-seq) (first a-seq))))
 
 (defn seq-max [seq-1 seq-2]
-  [:-])
+  (if (> (count seq-1) (count seq-2))
+    seq-1
+    seq-2))
 
 (defn longest-sequence [a-seq]
-  [:-])
+  (let [tail (rest a-seq)
+        head (first a-seq)]
+    (if (empty? tail)
+      head
+      (longest-sequence (conj
+                         (rest tail)
+                         (seq-max head (first tail)))))))
 
 (defn my-filter [pred? a-seq]
-  [:-])
+  (if (empty? a-seq)
+    []
+    (let [head (first a-seq)
+          tail (rest a-seq)
+          filtered (my-filter pred? tail)]
+      (if (pred? head)
+        (cons head filtered)
+        filtered))))
 
 (defn sequence-contains? [elem a-seq]
-  :-)
+  (cond
+    (empty? a-seq) false
+    (= elem (first a-seq)) true
+    :else (sequence-contains? elem (rest a-seq))))
 
 (defn my-take-while [pred? a-seq]
-  [:-])
+  (cond
+    (empty? a-seq) []
+    (pred? (first a-seq)) (cons (first a-seq) (my-take-while pred? (rest a-seq)))
+    :else []))
 
 (defn my-drop-while [pred? a-seq]
-  [:-])
+  (cond
+    (empty? a-seq) []
+    (pred? (first a-seq)) (my-drop-while pred? (rest a-seq))
+    :else a-seq))
 
 (defn seq= [a-seq b-seq]
   :-)
