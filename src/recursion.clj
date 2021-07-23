@@ -87,22 +87,35 @@
       [])))
 
 (defn power [n k]
-  :-)
+  (if (= k 0)
+    1
+    (* n (power n (- k 1)))))
 
 (defn fib [n]
-  :-)
+  (cond
+    (= n 0) 0
+    (= n 1) 1
+    :else (+ (fib (- n 1)) (fib (- n 2)))))
 
 (defn my-repeat [how-many-times what-to-repeat]
-  [:-])
+  (cond
+    (<= how-many-times 0) []
+    :else (cons what-to-repeat (my-repeat (- how-many-times 1) what-to-repeat))))
 
 (defn my-range [up-to]
-  [:-])
+  (cond
+    (= up-to 0) []
+    :else (cons (- up-to 1) (my-range (- up-to 1)))))
 
 (defn tails [a-seq]
-  [:-])
+  (if (empty? a-seq)
+    [a-seq]
+    (cons a-seq (tails (rest a-seq)))))
 
 (defn inits [a-seq]
-  [:-])
+  (if (empty? a-seq)
+    [a-seq]
+    (conj a-seq (inits (drop-last a-seq)))))
 
 (defn rotations [a-seq]
   [:-])
