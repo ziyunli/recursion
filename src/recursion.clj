@@ -73,10 +73,18 @@
     :else a-seq))
 
 (defn seq= [a-seq b-seq]
-  :-)
+  (cond
+    (not (= (count a-seq) (count b-seq))) false
+    (and (empty? a-seq) (empty? b-seq)) true
+    (= (first a-seq) (first b-seq)) (seq= (rest a-seq) (rest b-seq))
+    :else false))
 
 (defn my-map [f seq-1 seq-2]
-  [:-])
+  (let [a (first seq-1)
+        b (first seq-2)]
+    (if (and a b)
+      (cons (f a b) (my-map f (rest seq-1) (rest seq-2)))
+      [])))
 
 (defn power [n k]
   :-)
